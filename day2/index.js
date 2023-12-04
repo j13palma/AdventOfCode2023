@@ -24,17 +24,33 @@ textlines.forEach((line, index) => {
   gameData[index + 1] = cubeObject;
 });
 
-for (const game in gameData) {
-  for (const color in gameData[game]) {
-    if (Math.max(...gameData[game][color]) > cubeLimits[color]) {
-      delete gameData[game];
-      break;
+// Part 1 Solution
+const partA = () => {
+  for (const game in gameData) {
+    for (const color in gameData[game]) {
+      if (Math.max(...gameData[game][color]) > cubeLimits[color]) {
+        delete gameData[game];
+        break;
+      }
     }
   }
-}
 
-for (const game in gameData) {
-  total += Number(game);
-}
+  for (const game in gameData) {
+    total += Number(game);
+  }
+};
+
+const partB = () => {
+  for (const game in gameData) {
+    let setMax = 1;
+    for (const color in gameData[game]) {
+      console.log(color, gameData[game][color]);
+      setMax *= Math.max(...gameData[game][color]);
+    }
+    total += setMax;
+  }
+};
+
+partB();
 
 console.log(total);
